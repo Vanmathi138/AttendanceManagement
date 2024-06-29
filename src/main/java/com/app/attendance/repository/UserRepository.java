@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.app.attendance.entity.User;
+import com.app.attendance.enumeration.UserRole;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
@@ -28,6 +29,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
 	@Query(value = "SELECT * FROM user_details where user_name =:username",nativeQuery = true)
 	Optional<User> findByUserName(String username);
+
+	long countByUserRole(UserRole admin);
 
 
 }

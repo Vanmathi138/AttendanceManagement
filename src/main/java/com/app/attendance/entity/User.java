@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.app.attendance.auditing.AuditWithBaseEntity;
 import com.app.attendance.enumeration.Designation;
+import com.app.attendance.enumeration.Status;
 import com.app.attendance.enumeration.UserRole;
 import com.app.attendance.util.PasswordUtil;
 
@@ -62,6 +63,10 @@ public class User extends AuditWithBaseEntity implements UserDetails, Serializab
 	@Enumerated(EnumType.STRING)
 	@Column(name="user_role")
 	private UserRole userRole;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status	status;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="designation")
