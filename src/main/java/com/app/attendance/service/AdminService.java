@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.app.attendance.advice.AdminRegistrationException;
 import com.app.attendance.entity.User;
-import com.app.attendance.enumeration.Status;
 import com.app.attendance.enumeration.UserRole;
 import com.app.attendance.repository.UserRepository;
 import com.app.attendance.response.UserResponse;

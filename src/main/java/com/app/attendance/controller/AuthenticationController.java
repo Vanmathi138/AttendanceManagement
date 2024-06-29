@@ -26,12 +26,14 @@ import com.app.attendance.service.AdminService;
 import com.app.attendance.validation.AdminValidation;
 import com.app.attendance.validation.ValidationResult;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
+@Tag(name = "Authentication_Controller", description = "Defines endpoints that can be hit only when the User is not logged in..")
 public class AuthenticationController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -51,7 +53,8 @@ public class AuthenticationController {
 		User user = (User) validationResult.getObject();
 
 		User adminservice = adminService.createAdmin(user);
-		Map<String, Object> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>(
+				);
 		final String token = jwtService.generateToken(adminservice);
 		response.put("Status", 1);
 		response.put("message", "You have register successfully.");
