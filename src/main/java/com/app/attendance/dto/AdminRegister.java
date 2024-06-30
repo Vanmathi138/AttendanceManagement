@@ -1,4 +1,4 @@
-package com.app.attendance.request;
+package com.app.attendance.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,11 +10,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class AdminRegister {
+
+	
 	private String userName;
 
 	private String email;
 
 	private String mobileNo;
 
-	private String password; 
+	private String password;
+	
+	
+	
 }

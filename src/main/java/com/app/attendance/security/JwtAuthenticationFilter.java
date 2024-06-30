@@ -2,6 +2,7 @@ package com.app.attendance.security;
 
 import java.io.IOException;
 import static com.app.attendance.util.Constants.TOKEN_PREFIX;
+
 import static com.app.attendance.util.Constants.HEADER_STRING;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -18,9 +19,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class JwtAuthenticationFilter extends OncePerRequestFilter{
-	private JwtService jwtService;
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+//	@Autowired
+	private  JwtService jwtService;
+//	@Autowired
 	private  UserDetailsService userDetailsService;
+	
 	private  HandlerExceptionResolver exceptionResolver;
 	
 	@Autowired
@@ -58,5 +63,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 		}
 	}
 
-
+	
 }

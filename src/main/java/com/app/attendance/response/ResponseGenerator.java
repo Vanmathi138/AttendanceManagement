@@ -3,38 +3,41 @@ package com.app.attendance.response;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 
+
 @Component
 public class ResponseGenerator {
 
-	private static final Logger logger = Logger.getLogger(ResponseGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResponseGenerator.class);
 
-	public ResponseEntity<Response> successResponse(TransactionContext context,Object object, HttpStatus httpStatus) {
+    public ResponseEntity<Response> successResponse(TransactionContext context, Object object, HttpStatus httpStatus) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("correlationId", context.getCorrelationId());
+        headers.add("ApplicationLabel", context.getApplicationLabel());
+        headers.add("Content-Type", "application/json");
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("correlationId", context.getCorrelationId());
-		headers.add("ApplicationLabel", context.getApplicationLabel());
-		headers.add("Content-Type", "application/json");
-		Response response = new Response();
-		response.setData(object);
-		response.setTimeStamp(new SimpleDateFormat("yyy.MM.dd.HH.mm.ss").format(new Date()));
-		logger.debug("response class is "+ Date.class);
-		logger.debug("response status is "+ httpStatus.toString());
-		ResponseEntity<Response> responseEntity = new ResponseEntity<Response>(response,headers,httpStatus);
-		return responseEntity;
-	}
+        Response response = new Response();
+        response.setData(object);
+        response.setTimeStamp(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
 
-	public TransactionContext generateTransationContext(HttpHeaders httpHeaders) {
+        logger.debug("response class is {}", Date.class);
+        logger.debug("response status is {}", httpStatus.toString());
+
+        return new ResponseEntity<>(response, headers, httpStatus);
+    }
+
+    public TransactionContext generateTransationContext(HttpHeaders httpHeaders) {
 
 		TransactionContext context = new TransactionContext();
-
-		if (null == httpHeaders) {
+		
+		if(null == httpHeaders) {
 			context.setCorrelationId("demo");
 			context.setApplicationLabel("demo");
 			return context;
@@ -50,23 +53,22 @@ public class ResponseGenerator {
 			context.setApplicationLabel("demo");
 		}
 		return context;
-
 	}
 
-	public ResponseEntity<Response> errorResponse(TransactionContext context, String errorMessage, HttpStatus httpStatus) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("correlationId", context.getCorrelationId());
-		headers.add("ApplicationLable", context.getApplicationLabel());
-		headers.add("Content-Type", "application/json");
-		Error error = new Error();
-		error.setCode(httpStatus.toString()+"0001");
-		error.setReason(errorMessage);
-		Response response = new Response();
-		response.setError(error);
-		response.setTimeStamp(new SimpleDateFormat("yyy.MM.dd.HH.mm.ss").format(new Date()));
-		ResponseEntity<Response> responseEntity = new ResponseEntity<Response>(response, headers, httpStatus);
-		return responseEntity;
-	}
+    public ResponseEntity<Response> errorResponse(TransactionContext context, String errorMessage, HttpStatus httpStatus) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("correlationId", context.getCorrelationId());
+        headers.add("ApplicationLabel", context.getApplicationLabel());
+        headers.add("Content-Type", "application/json");
 
+        Error error = new Error();
+        error.setCode(httpStatus.toString() + "0001");
+        error.setReason(errorMessage);
+
+        Response response = new Response();
+        response.setError(error);
+        response.setTimeStamp(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+
+        return new ResponseEntity<>(response, headers, httpStatus);
+    }
 }
-

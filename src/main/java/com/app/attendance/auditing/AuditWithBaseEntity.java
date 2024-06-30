@@ -40,4 +40,5 @@ public class AuditWithBaseEntity extends BaseEntity{
 	@Column(name = "updated_by", insertable = false)
 	private String updatedBy;
 
+
 }
