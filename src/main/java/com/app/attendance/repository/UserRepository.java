@@ -27,5 +27,11 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 	boolean existsByUserName(String email);
 
 	Long countByUserRole(UserRole userRole);
+	
+	 @Query("SELECT MAX(CAST(SUBSTRING(empCode, LENGTH(empCode) - 2, 3) AS int)) " +
+	           "FROM User " +
+	           "WHERE SUBSTRING(empCode, 5, 2) = :designationCode " +
+	           "AND SUBSTRING(empCode, 8, 4) = :year")
+	    Integer findLastSequenceNumber(@Param("designationCode") String designationCode, @Param("year") int year);
 
 }
