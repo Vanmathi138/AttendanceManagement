@@ -1,4 +1,4 @@
-package com.app.attendance.advice;
+package com.app.attendance.response.advice;
 
 public class AdminRegistrationException extends RuntimeException {
 

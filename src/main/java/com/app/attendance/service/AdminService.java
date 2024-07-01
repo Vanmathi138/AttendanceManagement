@@ -1,6 +1,6 @@
 package com.app.attendance.service;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.Map;
 import java.util.Optional;
 
@@ -9,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.app.attendance.advice.AdminRegistrationException;
 import com.app.attendance.entity.User;
 import com.app.attendance.enumeration.UserRole;
 import com.app.attendance.repository.UserRepository;
 import com.app.attendance.response.UserResponse;
+import com.app.attendance.response.advice.AdminRegistrationException;
 import com.app.attendance.security.JwtService;
 import com.app.attendance.util.PasswordUtil;
 

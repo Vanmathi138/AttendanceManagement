@@ -1,6 +1,7 @@
 package com.app.attendance.repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +11,7 @@ import com.app.attendance.entity.User;
 import com.app.attendance.enumeration.UserRole;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<User, UUID>{
 
 	@Query(value = "SELECT * FROM user_details where email =:email ", nativeQuery = true)
 	Optional<User> findByDuplicateEamil(String email);
@@ -31,6 +32,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	Optional<User> findByUserName(String username);
 
 	long countByUserRole(UserRole admin);
+
+	@Query(value = "SELECT * FROM user_details where role=:admin", nativeQuery = true)
+	Optional<User> findByUserRoleType(String admin);
 
 
 }

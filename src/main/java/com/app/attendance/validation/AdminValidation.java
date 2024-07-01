@@ -9,7 +9,7 @@ import javax.security.auth.Subject;
 
 import org.springframework.stereotype.Service;
 
-import com.app.attendance.advice.ObjectInvalidException;
+import com.app.attendance.response.advice.ObjectInvalidException;
 import com.app.attendance.entity.User;
 import com.app.attendance.enumeration.RequestType;
 import com.app.attendance.enumeration.UserRole;

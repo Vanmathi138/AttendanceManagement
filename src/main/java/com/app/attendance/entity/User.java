@@ -110,4 +110,5 @@ public class User extends AuditWithBaseEntity implements UserDetails, Serializab
 	public boolean isEnabled() {
 		return true;
 	}
+
 }

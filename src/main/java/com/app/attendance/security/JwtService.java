@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.app.attendance.entity.User;
+import com.app.attendance.service.UserService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -104,7 +105,7 @@ public class JwtService {
 		}
 	}
 
-	public String getUseeNmaeFromToken(String token) {
+	public String getUserNameFromToken(String token) {
 		try {
 			// Parse the JWT token and extract user details
 			Key key = Keys.hmacShaKeyFor(Base64.getEncoder().encode(SECRET_KEY.getBytes()));

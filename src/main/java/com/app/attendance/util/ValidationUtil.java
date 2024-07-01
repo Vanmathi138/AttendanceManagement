@@ -157,7 +157,18 @@ public class ValidationUtil {
 			return false;
 		}
 		return true;
-
 	}
+	public static UserRole getFormattedRole(UserRole role) {
+		switch (role) {
+		case EMPLOYEE:
+			return UserRole.EMPLOYEE;
+		case ADMIN:
+			return UserRole.ADMIN;
+		}
+		return null;
+	}
+	public static boolean isNullObject(UserRole value) {
+		return null == value;
+	}	
 
 }
